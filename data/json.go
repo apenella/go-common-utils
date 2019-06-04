@@ -12,10 +12,14 @@ func LoadJSONFile(f string, object interface{}) error {
 	file, err := ioutil.ReadFile(f)
 
 	if err != nil {
-		return errors.New("(utils::loadJSONFile) Error on loading file '" + f + "' " + err.Error())
+		return errors.New("(LoadJSONFile) Error on loading file '" + f + "'. " + err.Error())
+	}
+	err = json.Unmarshal(file, object)
+	if err != nil {
+		return errors.New("(LoadJSONFile) Error on " + f + " unmarshaling. " + err.Error())
 	}
 
-	return json.Unmarshal(file, object)
+	return nil
 }
 
 // ObjectToJSONString converts any object to a json string
