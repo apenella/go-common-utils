@@ -36,35 +36,35 @@ func TestMessages(t *testing.T) {
 	l.SetWriter(io.Writer(&w))
 	l.Info("hi!")
 	time.Sleep(100 * time.Millisecond)
-	assert.Equal(t, " INFO [hi!]\n", w.String())
+	assert.Equal(t, "	INFO	[hi!]\n", w.String())
 
 	t.Log("Testing Warn method")
 	l.SetLevel(WARN)
 	w.Reset()
 	l.Warn("hi!")
 	time.Sleep(100 * time.Millisecond)
-	assert.Equal(t, " WARN [hi!]\n", w.String())
+	assert.Equal(t, "	WARN	[hi!]\n", w.String())
 
 	t.Log("Testing Error method")
 	l.SetLevel(ERROR)
 	w.Reset()
 	l.Error("hi!")
 	time.Sleep(100 * time.Millisecond)
-	assert.Equal(t, " ERROR [hi!]\n", w.String())
+	assert.Equal(t, "	ERROR	[hi!]\n", w.String())
 
 	t.Log("Testing Debug method")
 	l.SetLevel(DEBUG)
 	w.Reset()
 	l.Debug("hi!")
 	time.Sleep(100 * time.Millisecond)
-	assert.Equal(t, " DEBUG [hi!]\n", w.String())
+	assert.Equal(t, "	DEBUG	[hi!]\n", w.String())
 
 	t.Log("Testing info message with debug level")
 	l.SetLevel(DEBUG)
 	w.Reset()
 	l.Info("hi!")
 	time.Sleep(100 * time.Millisecond)
-	assert.Equal(t, " INFO [hi!]\n", w.String())
+	assert.Equal(t, "	INFO	[hi!]\n", w.String())
 
 	t.Log("Testing skip message due low level log")
 	l.SetLevel(INFO)
@@ -72,6 +72,12 @@ func TestMessages(t *testing.T) {
 	l.Debug("hi!")
 	time.Sleep(100 * time.Millisecond)
 	assert.Equal(t, 0, len(w.String()), "")
+
+	t.Log("Testing json message")
+	l.SetFormat(JSON)
+	l.Info("hi!")
+	time.Sleep(100 * time.Millisecond)
+	assert.Equal(t, "{\"timestamp\": \"\", \"level\": \"INFO\", \"message\": \"[hi!]\"}\n", w.String())
 
 	StopLog()
 }

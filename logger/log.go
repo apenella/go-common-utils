@@ -19,7 +19,7 @@ const (
 	JSON
 
 	TabFormat             = "%s	%s	%s"
-	JsonFormat            = "{timestamp:%s, level:%s, message: %s}"
+	JsonFormat            = "{\"timestamp\": \"%s\", \"level\": \"%s\", \"message\": \"%s\"}"
 	TimestampLayoutFormat = "2006-01-02 15:04:00"
 )
 
