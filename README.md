@@ -9,3 +9,6 @@ Common utils are organized in:
 - **networking:** Functions for networking purpose.
 - **os:** Functions to interactuate with the system.
 - **types:** Custom types definition.
+
+## License
+go-common-utils is available under [MIT](https://github.com/apenella/go-common-utils/blob/master/LICENSE) license.
