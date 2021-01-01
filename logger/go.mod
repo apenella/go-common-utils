@@ -1,5 +1,5 @@
 module github.com/apenella/go-common-utils/logger
 
-go 1.12
+go 1.15
 
-require github.com/stretchr/testify v1.4.0
+require github.com/stretchr/testify v1.6.1
