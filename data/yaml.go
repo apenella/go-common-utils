@@ -1,4 +1,4 @@
-package common
+package data
 
 import (
 	"errors"
@@ -19,4 +19,17 @@ func LoadYAMLFile(file string, object interface{}) error {
 	}
 
 	return nil
+}
+
+// ObjectToYamlString converts any object to a yaml string
+func ObjectToYamlString(object interface{}) (string, error) {
+	var yamled []byte
+	var err error
+
+	yamled, err = yaml.Marshal(object)
+	if err != nil {
+		return err.Error(), err
+	}
+
+	return string(yamled), nil
 }
