@@ -8,6 +8,7 @@ Common utils are organized in:
 - **logger:** Manages log messages (no longer maintained)
 - **networking:** Functions for networking purpose.
 - **os:** Functions to interactuate with the system.
+- **transformer/string:** Functions to manipulate messages
 - **types:** Custom types definition.
 
 ## License
