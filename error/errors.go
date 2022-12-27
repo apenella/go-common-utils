@@ -34,25 +34,44 @@ func (err *Error) ErrorWithContext() string {
 
 // getWrappedErrors
 func (err *Error) getWrappedErrors() string {
-	errors := ""
 
-	for _, e := range err.wrappedErrors {
-		errors = fmt.Sprintf("%s\n\t%s", errors, e.Error())
+	errors := ""
+	if len(err.wrappedErrors) == 0 {
+		return errors
+	}
+
+	if err.message != "" {
+		errors = fmt.Sprintf("%s\n ", errors)
+	}
+
+	for it, e := range err.wrappedErrors {
+		msg := e.Error()
+		errors = fmt.Sprintf("%s%s", errors, msg)
+
+		if it < len(err.wrappedErrors)-1 {
+			errors = fmt.Sprintf("%s\n ", errors)
+		}
 	}
 
 	return errors
 }
 
+// getWrappedErrorsWithContext
 func (err *Error) getWrappedErrorsWithContext() string {
+
+	if len(err.wrappedErrors) == 0 {
+		return ""
+	}
 
 	errors := ""
 	for _, e := range err.wrappedErrors {
 		errorKind, ok := e.(*Error)
 		if ok {
-			errors = fmt.Sprintf("%s\n\t%s", errors, errorKind.ErrorWithContext())
+			errors = fmt.Sprintf("%s\n %s", errors, errorKind.ErrorWithContext())
 		} else {
-			errors = fmt.Sprintf("%s\n\t%s", errors, e.Error())
+			errors = fmt.Sprintf("%s\n %s", errors, e.Error())
 		}
 	}
+
 	return errors
 }
